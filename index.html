@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where Have We Been — Meeting of the Minds</title>
+<link rel="icon" href="assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Work+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #efe6d1; --cream-2: #e6dcc2; --rule: #cec2a8;
+    --ink: #171514; --ink-2: #332f2b; --mute: #6a6256;
+    --cobalt: #13306b; --cobalt-deep: #0a204e; --terracotta: #b7432b;
+    --olive: #6b7a3a; --purple: #6b4a8c;
+    --serif: "Source Serif 4", Georgia, serif;
+    --sans: "Work Sans", -apple-system, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { height: 100%; background: var(--paper); color: var(--ink);
+    font-family: var(--sans); font-weight: 300; }
+  .slide {
+    display: none; width: 100vw; height: 100vh;
+    padding: 5.5vh 7vw; flex-direction: column; position: relative;
+  }
+  .slide.active { display: flex; }
+  .kicker {
+    font-family: var(--mono); font-size: clamp(10px, 1.1vw, 13px); font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--terracotta);
+    margin-bottom: 1.8vh;
+  }
+  h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 4.6vw, 62px);
+       line-height: 1.08; margin-bottom: 2.4vh; }
+  h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(26px, 3.2vw, 44px);
+       line-height: 1.12; margin-bottom: 2.2vh; }
+  h1 em, h2 em { font-style: italic; color: var(--cobalt); }
+  p, li { font-family: var(--serif); font-size: clamp(16px, 1.75vw, 24px); line-height: 1.5; color: var(--ink-2); }
+  .sub { font-family: var(--sans); font-weight: 300; color: var(--mute);
+         font-size: clamp(14px, 1.5vw, 20px); }
+  ul { padding-left: 1.2em; display: flex; flex-direction: column; gap: 1.4vh; }
+  .stat { font-family: var(--serif); font-size: clamp(56px, 8vw, 120px); color: var(--cobalt); line-height: 1; }
+  .stat.tc { color: var(--terracotta); }
+  .figwrap { flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; margin-top: 1.5vh; }
+  .figwrap img { max-width: 100%; max-height: 100%; object-fit: contain;
+    background: #fff; border: 1px solid var(--rule); border-radius: 3px; padding: 8px; }
+  .figcap { font-family: var(--sans); font-size: clamp(12px, 1.2vw, 15px); color: var(--mute);
+    margin-top: 1vh; }
+  .footer {
+    position: absolute; bottom: 2.4vh; left: 7vw; right: 7vw;
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--mono); font-size: clamp(9px, 0.95vw, 12px);
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--mute);
+  }
+  .footer img { height: clamp(16px, 2vh, 24px); opacity: 0.85; filter: brightness(0.4); }
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 4vw; flex: 1; min-height: 0; align-items: center; }
+  .rule-top { border-top: 2px solid var(--cobalt); padding-top: 1.6vh; }
+  .qnum { font-family: var(--mono); font-size: clamp(12px, 1.3vw, 16px); color: var(--terracotta); font-weight: 500; margin-right: 0.6em; }
+  .srcs li { font-size: clamp(13px, 1.35vw, 18px); line-height: 1.45; }
+  .navhint { position: fixed; bottom: 8px; right: 12px; font-family: var(--mono);
+    font-size: 10px; color: var(--mute); opacity: 0.6; z-index: 5; }
+  .agenda-row { display: flex; gap: 1.2em; align-items: baseline; padding: 1.15vh 0; border-bottom: 1px solid var(--rule); }
+  .agenda-row .t { font-family: var(--mono); font-size: clamp(12px, 1.25vw, 16px); color: var(--cobalt); min-width: 5.2em; font-weight: 500; }
+  .agenda-row .who { font-family: var(--sans); color: var(--mute); font-size: clamp(13px, 1.4vw, 18px); margin-left: auto; }
+  .bigquote { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.5vw, 34px); line-height: 1.45; color: var(--ink-2); max-width: 58ch; }
+  .attr { font-family: var(--sans); color: var(--mute); margin-top: 2vh; font-size: clamp(14px, 1.4vw, 18px); }
+</style>
+</head>
+<body>
+
+<!-- 1 · TITLE -->
+<section class="slide active">
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+    <div class="kicker">Meeting of the Minds · August 4, 2026 · 2:35–3:35 ET</div>
+    <h1>Where Have We Been?</h1>
+    <p class="sub">Looking back: where we started and what we have learned.<br>
+    Reflections from DPI, the P3 Lab, and Democracy Fund — then all of us.</p>
+  </div>
+  <div class="footer">
+    <span>Civic Power Lab · Harvard Kennedy School</span>
+    <img src="assets/logo-email-cream.png" alt="Civic Power Lab">
+  </div>
+</section>
+
+<!-- 2 · HOW THIS HOUR WORKS -->
+<section class="slide">
+  <div class="kicker">This hour</div>
+  <h2>Three vantage points, one conversation</h2>
+  <div style="flex:1; margin-top:1vh;">
+    <div class="agenda-row"><span class="t">~10 min</span><span style="font-family:var(--serif)">Joy Cushman</span><span class="who">the DPI view</span></div>
+    <div class="agenda-row"><span class="t">~10 min</span><span style="font-family:var(--serif)">Jane</span><span class="who">the P3 Lab view</span></div>
+    <div class="agenda-row"><span class="t">~10 min</span><span style="font-family:var(--serif)">Heather</span><span class="who">the Democracy Fund view</span></div>
+    <div class="agenda-row"><span class="t">~30 min</span><span style="font-family:var(--serif)">All of us</span><span class="who">what we've learned, where it strains</span></div>
+    <p style="margin-top:3vh" class="sub">A prompt for the reflections: name one thing you believed at the start that the work has changed, and one bet you'd still defend.</p>
+  </div>
+  <div class="footer"><span>Where Have We Been</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 3 · WHERE WE STARTED -->
+<section class="slide">
+  <div class="kicker">Where we started</div>
+  <h2>Power as a <em>prism</em>, not a mirror</h2>
+  <ul style="margin-top:1vh">
+    <li><strong>Prisms of the People</strong> (2021): the question is not how many people a movement touches but what its organization lets those people <em>do</em> — independent power constituted through leaders, teams, and strategy.</li>
+    <li><strong>Minnesota Power Metrics</strong> (2023): the first serious attempt to measure a state ecosystem's power-building — actors, relationships, faces of power — as a shared instrument, not a one-off study.</li>
+    <li>The bet we made together: power-building can be <em>measured</em> — and measurement can serve the organizing, not just describe it.</li>
+  </ul>
+  <div class="footer"><span>Where Have We Been</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 4 · WHAT WE BUILT -->
+<section class="slide">
+  <div class="kicker">What we built</div>
+  <h2>From case studies to shared infrastructure</h2>
+  <ul style="margin-top:1vh">
+    <li><strong>31 data-use agreements</strong> across 11 states — organizations opening their internal CRM records to shared research: 38,740 participants, 93,233 attendances in the 2024 cycle alone.</li>
+    <li><strong>33 prospective interviews</strong> — theories of change captured before the election, not rationalized after it.</li>
+    <li><strong>A family of instruments</strong> now in live pilots: power mapping (actors + relationships), team effectiveness, and the agency scale.</li>
+    <li>One organization's full 13-year record (78,520 attendances) as the longitudinal deep case.</li>
+  </ul>
+  <div class="footer"><span>Where Have We Been</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 5 · THE HEADLINE NUMBER -->
+<section class="slide">
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+    <div class="kicker">What we learned · 1</div>
+    <div class="stat tc">71%</div>
+    <h2 style="margin-top:1.5vh">of participants come once and never return</h2>
+    <p class="sub" style="max-width:60ch">At mass rallies, 93%. The binding constraint on movement capacity is not turnout — it is retention. Most of what mobilization produces evaporates before it becomes anything.</p>
+  </div>
+  <div class="footer"><span>Many Show Up, Few Return (McKenna 2026)</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 6 · THE PURPLE LINE -->
+<section class="slide">
+  <div class="kicker">What we learned · 2</div>
+  <h2>The purple line: the thin stratum that matters</h2>
+  <div class="figwrap"><img src="assets/purple_line_growth.png" alt="Cumulative purple-line leaders by organization"></div>
+  <div class="figcap">Cumulative committed leaders (5+ events, both modes, on a team) across 2024. Organizations with similar turnout differ enormously in the leadership they accumulate — the property we call catchment.</div>
+  <div class="footer"><span>Many Show Up, Few Return (McKenna 2026)</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 7 · FORM NOT LABEL -->
+<section class="slide">
+  <div class="kicker">What we learned · 3</div>
+  <h2>What holds a newcomer: <em>who is already in the room</em></h2>
+  <div class="figwrap"><img src="assets/light_in_storm.png" alt="Standing crew vs strangers by event size"></div>
+  <div class="figcap">Entering among a standing crew raises 90-day return by 12.8 points — and the gap <em>widens</em> as events grow. A big room with a dense core behaves like an organizing space; a big room of strangers behaves like a rally.</div>
+  <div class="footer"><span>Many Show Up, Few Return (McKenna 2026)</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 8 · SAME ORG TWO EVENTS -->
+<section class="slide">
+  <div class="kicker">What we learned · 4</div>
+  <h2>Same organization, two mass events</h2>
+  <div class="figwrap"><img src="assets/teamed_vs_atomized.png" alt="Teamed convention vs atomized lobby day"></div>
+  <div class="figcap">Left: a member convention — 31% of 3,683 attendees woven in through prior small-event ties. Right: a lobby day — 9% woven in; the strangers returned at a rate near zero. A base assembling versus a crowd turning out.</div>
+  <div class="footer"><span>Many Show Up, Few Return (McKenna 2026)</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 9 · TEAMS -->
+<section class="slide">
+  <div class="kicker">What we learned · 5</div>
+  <h2>Teams are what separate strong organizations from weak ones</h2>
+  <div class="figwrap"><img src="assets/coattendance_smallmultiple.png" alt="Co-attendance team structure across organizations"></div>
+  <div class="figcap">Each panel is one organization's membership; colored dots sit inside a detected team. The teamed share — not headcount, not budget — tracks retention, leadership density, and assessed efficacy.</div>
+  <div class="footer"><span>Many Show Up, Few Return (McKenna 2026)</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 10 · SHALLOW FUNNEL -->
+<section class="slide">
+  <div class="kicker">What we learned · 6</div>
+  <h2>Reach without reproduction is an ego network</h2>
+  <div class="figwrap"><img src="assets/cf_recruitment_network.png" alt="Hub and spoke recruitment network"></div>
+  <div class="figcap">One large organization's complete who-recruited-whom record: 73 recruiters, 84% pure hubs whose recruits never recruit, twelve reproducers. Recruitment does not cascade unless the organization is built for it.</div>
+  <div class="footer"><span>Many Show Up, Few Return (McKenna 2026)</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 11 · COMPOUNDING -->
+<section class="slide">
+  <div class="kicker">What we learned · 7</div>
+  <h2>Where the loop closes, capacity <em>compounds</em></h2>
+  <div class="figwrap"><img src="assets/isaiah_growth.png" alt="13-year growth of base and leadership"></div>
+  <div class="figcap">Thirteen years in one organization: the base and the committed-leader stratum accumulate rather than churn. The retained become the leaders who build the containers that hold the next cohort.</div>
+  <div class="footer"><span>Many Show Up, Few Return (McKenna 2026)</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 12 · WHAT ORGANIZERS ALREADY KNEW -->
+<section class="slide">
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+    <div class="kicker">What the field taught us</div>
+    <p class="bigquote">"[The] only number I care about is the purple line&hellip; If our most engaged leaders, if that number is going up, that's the juice."</p>
+    <p class="attr">— a lead organizer, recalling his training. The research measured what the most experienced organizers already watched. That convergence is the finding.</p>
+  </div>
+  <div class="footer"><span>Where Have We Been</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 13 · DISCUSSION -->
+<section class="slide">
+  <div class="kicker">For discussion</div>
+  <h2>Questions for the room</h2>
+  <ul style="margin-top:1vh">
+    <li><span class="qnum">1</span>What did each of us believe at the start of this work that the evidence has changed? What bet would we still defend?</li>
+    <li><span class="qnum">2</span>The strongest findings are about <em>form</em> — teams, containers, standing crews — not tactics or labels. What does that reframe about what funders fund and what intermediaries teach?</li>
+    <li><span class="qnum">3</span>Measurement worked when it served the organizing (the purple line became the organizations' own referent). Where has it strained against the work, and what should we refuse to measure?</li>
+    <li><span class="qnum">4</span>What would it take for these findings to hold up outside this cohort — other regions, other ideologies, other decades?</li>
+    <li><span class="qnum">5</span>What of this is ready to mainstream — and what still needs a wave of learning before it travels? (A handoff to Miya and Joy.)</li>
+  </ul>
+  <div class="footer"><span>Where Have We Been</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<!-- 14 · SOURCES -->
+<section class="slide">
+  <div class="kicker">Sources</div>
+  <h2>What this section draws on</h2>
+  <ul class="srcs" style="margin-top:1vh">
+    <li>Han, McKenna &amp; Oyakawa, <em>Prisms of the People: Power and Organizing in Twenty-First-Century America</em> (Chicago, 2021) — esp. the power chapter.</li>
+    <li><em>Minnesota Power Metrics</em>, final report (2023).</li>
+    <li><em>Civic Power</em> — project overview and analytic framework.</li>
+    <li>McKenna, "Many Show Up, Few Return: How Social Movements Build or Spend a Base" (working paper, 2026) — 20 organizations, 11 states, 38,740 participants, 93,233 attendances; 33 prospective interviews; 13-year longitudinal case.</li>
+    <li>Instruments in pilot: Power Actors &amp; Relationships (power mapping); Team Effectiveness (with PICO California); the Agency scale (with DPI Data Cohort).</li>
+    <li>The organizations themselves: 31 DUAs, their records, their organizers' time and trust.</li>
+  </ul>
+  <div class="footer"><span>Civic Power Lab · civicpowerlab.us</span><img src="assets/logo-email-cream.png" alt=""></div>
+</section>
+
+<div class="navhint">← → to navigate</div>
+
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  function show(n) {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+  }
+  addEventListener('keydown', e => {
+    if (['ArrowRight',' ','PageDown'].includes(e.key)) { e.preventDefault(); show(i+1); }
+    if (['ArrowLeft','PageUp'].includes(e.key)) { e.preventDefault(); show(i-1); }
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+  });
+  addEventListener('click', e => { if (!e.target.closest('a')) show(i+1); });
+</script>
+</body>
+</html>
